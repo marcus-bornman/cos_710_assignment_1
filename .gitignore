@@ -1,2 +1,4 @@
 # Project exclude paths
 /target/
+/cos_710_assignment_1.iml
+/.idea/
