@@ -1,0 +1,96 @@
+parent.0 = koza.params
+
+# ========================================== The cores and random seeds to use
+evalthreads = 				4
+breedthreads = 				4
+seed.0 =				time
+seed.1 =				time
+seed.2 =				time
+seed.3 =				time
+
+# ========================================== The available nodes
+gp.fs.0.size = 6
+gp.fs.0.func.0 = nodes.Add
+gp.fs.0.func.0.nc = nc2
+gp.fs.0.func.1 = nodes.Divide
+gp.fs.0.func.1.nc = nc2
+gp.fs.0.func.2 = nodes.Multiply
+gp.fs.0.func.2.nc = nc2
+gp.fs.0.func.3 = nodes.Subtract
+gp.fs.0.func.3.nc = nc2
+gp.fs.0.func.4 = nodes.Confirmed
+gp.fs.0.func.4.nc = nc1
+gp.fs.0.func.5 = nodes.R
+gp.fs.0.func.5.nc = nc3
+
+
+# ========================================== Constraints on Nodes
+gp.type.a.size = 2
+gp.type.a.0.name = nil
+gp.type.a.1.name = R
+gp.type.s.size = 1
+gp.type.s.0.name = R-or-nil
+gp.type.s.0.size = 2
+gp.type.s.0.member.0 = R
+gp.type.s.0.member.1 = nil
+
+gp.nc.size = 3
+
+gp.nc.0 = ec.gp.GPNodeConstraints
+gp.nc.0.name = nc1
+gp.nc.0.returns = nil
+gp.nc.0.size = 1
+gp.nc.0.child.0 = R
+
+gp.nc.1 = ec.gp.GPNodeConstraints
+gp.nc.1.name = nc2
+gp.nc.1.returns = nil
+gp.nc.1.size = 2
+gp.nc.1.child.0 = R-or-nil
+gp.nc.1.child.1 = R-or-nil
+
+gp.nc.2 = ec.gp.GPNodeConstraints
+gp.nc.2.name = nc3
+gp.nc.2.returns = R
+gp.nc.2.size = 0
+
+
+# ========================================== Initial tree creation
+gp.koza.half.min-depth = 2
+gp.koza.half.max-depth = 8
+gp.koza.half.growp = 0.5
+
+
+# ========================================== Population and generation parameters
+generations =				256
+pop.subpop.0.size =			2048
+
+
+# ========================================== Crossover, mutation and reproduction rates
+pop.subpop.0.species.pipe.num-sources = 3
+pop.subpop.0.species.pipe.source.0 = ec.gp.koza.CrossoverPipeline
+pop.subpop.0.species.pipe.source.0.prob = 0.9
+pop.subpop.0.species.pipe.source.1 = ec.gp.koza.MutationPipeline
+pop.subpop.0.species.pipe.source.1.prob = 0.05
+pop.subpop.0.species.pipe.source.2 = ec.breed.ReproductionPipeline
+pop.subpop.0.species.pipe.source.2.prob = 0.05
+
+
+# ========================================== Crossover and mutation methods
+gp.koza.xover.source.0 = ec.select.TournamentSelection
+gp.koza.xover.source.1 = same
+gp.koza.xover.ns.0 = ec.gp.koza.KozaNodeSelector
+gp.koza.xover.ns.1 = same
+gp.koza.xover.maxdepth = 16
+gp.koza.xover.tries = 1
+gp.koza.mutate.source.0 = ec.select.TournamentSelection
+gp.koza.mutate.ns.0 = ec.gp.koza.KozaNodeSelector
+gp.koza.mutate.build.0 = ec.gp.koza.GrowBuilder
+gp.koza.mutate.maxdepth = 16
+gp.koza.mutate.tries = 1
+select.tournament.size = 256
+
+
+# ========================================== The problem to evaluate
+eval.problem = problem.CovidProblem
+eval.problem.data = problem.PredictionData
