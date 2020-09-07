@@ -8,20 +8,43 @@ seed.1 =				time
 seed.2 =				time
 seed.3 =				time
 
+# ========================================== The details of the trees (3 trees will be used to predict confirmed, deaths and recoveries)
+pop.subpop.0.species.ind.numtrees = 3
+
+pop.subpop.0.species.ind.tree.0 = ec.gp.GPTree
+pop.subpop.0.species.ind.tree.0.tc = tc0
+pop.subpop.0.species.ind.tree.1 = ec.gp.GPTree
+pop.subpop.0.species.ind.tree.1.tc = tc0
+pop.subpop.0.species.ind.tree.2 = ec.gp.GPTree
+pop.subpop.0.species.ind.tree.2.tc = tc0
+
+gp.tc.size = 1
+
+gp.tc.0 = ec.gp.GPTreeConstraints
+gp.tc.0.name = tc0
+gp.tc.0.fset = f0
+gp.tc.0.returns = nil
+gp.tc.0.init = ec.gp.koza.HalfBuilder
+
+
 # ========================================== The available nodes
-gp.fs.0.size = 6
-gp.fs.0.func.0 = nodes.Add
-gp.fs.0.func.0.nc = nc2
-gp.fs.0.func.1 = nodes.Divide
-gp.fs.0.func.1.nc = nc2
-gp.fs.0.func.2 = nodes.Multiply
-gp.fs.0.func.2.nc = nc2
-gp.fs.0.func.3 = nodes.Subtract
-gp.fs.0.func.3.nc = nc2
-gp.fs.0.func.4 = nodes.Confirmed
-gp.fs.0.func.4.nc = nc1
-gp.fs.0.func.5 = nodes.R
-gp.fs.0.func.5.nc = nc3
+gp.fs.0.size = 8
+gp.fs.0.func.0 = nodes.R
+gp.fs.0.func.0.nc = nc0
+gp.fs.0.func.1 = nodes.Confirmed
+gp.fs.0.func.1.nc = nc1
+gp.fs.0.func.2 = nodes.Deaths
+gp.fs.0.func.2.nc = nc1
+gp.fs.0.func.3 = nodes.Recovered
+gp.fs.0.func.3.nc = nc1
+gp.fs.0.func.4 = nodes.Add
+gp.fs.0.func.4.nc = nc2
+gp.fs.0.func.5 = nodes.Divide
+gp.fs.0.func.5.nc = nc2
+gp.fs.0.func.6 = nodes.Multiply
+gp.fs.0.func.6.nc = nc2
+gp.fs.0.func.7 = nodes.Subtract
+gp.fs.0.func.7.nc = nc2
 
 
 # ========================================== Constraints on Nodes
@@ -37,22 +60,22 @@ gp.type.s.0.member.1 = nil
 gp.nc.size = 3
 
 gp.nc.0 = ec.gp.GPNodeConstraints
-gp.nc.0.name = nc1
-gp.nc.0.returns = nil
-gp.nc.0.size = 1
-gp.nc.0.child.0 = R
+gp.nc.0.name = nc0
+gp.nc.0.returns = R
+gp.nc.0.size = 0
 
 gp.nc.1 = ec.gp.GPNodeConstraints
-gp.nc.1.name = nc2
+gp.nc.1.name = nc1
 gp.nc.1.returns = nil
-gp.nc.1.size = 2
-gp.nc.1.child.0 = R-or-nil
-gp.nc.1.child.1 = R-or-nil
+gp.nc.1.size = 1
+gp.nc.1.child.0 = R
 
 gp.nc.2 = ec.gp.GPNodeConstraints
-gp.nc.2.name = nc3
-gp.nc.2.returns = R
-gp.nc.2.size = 0
+gp.nc.2.name = nc2
+gp.nc.2.returns = nil
+gp.nc.2.size = 2
+gp.nc.2.child.0 = R-or-nil
+gp.nc.2.child.1 = R-or-nil
 
 
 # ========================================== Initial tree creation
