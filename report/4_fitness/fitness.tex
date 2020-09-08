@@ -1,0 +1,28 @@
+\section{Fitness Function}\label{sec:fitness}
+As a precursor to understanding how the fitness of a chromosome is calculated, it is important to note that the training data consists of a collection of records from which the cumulative number of cases, deaths and recoveries associated with the COVID-19 virus on a particular day can be extracted.
+
+To determine the fitness of individuals, we use the accuracy of each of the individual's 3 trees when predicting the number of cases, deaths or recoveries for each day in the training period. To be more specific, for a particular day the accuracy of the first tree is determined by calculating the difference between its prediction and the actual number of cases. Then, the difference is divided by the actual number of cases to get a ratio for which a lower ratio indicates a better fitness.
+
+The same calculation is applied to the second tree to find its accuracy in predicting the number of deaths and to the third tree to find its accuracy in predicting the number of recoveries. The process is repeated for each day in the training data set until, eventually, the fitness of the chromosome is calculated as the average accuracy in calculating cases, deaths and recoveries over the training period. Algorithm \ref{alg:fitness} depicts the fitness function in its entirety.
+
+\begin{algorithm}[H]\label{alg:fitness}
+\SetAlgoLined
+ \ForEach{date in trainingData}{
+   cases = trainingData.cases(date)\;
+   predictedCases = individual.trees[0].predict(date)\;
+   casesAccuracy = abs(cases - predictedCases) / cases\;
+   \BlankLine
+   deaths = trainingData.deaths(date)\;
+   predictedDeaths = individual.trees[1].predict(date)\;
+   deathsAccuracy = abs(deaths - predictedDeaths) / deaths\;
+   \BlankLine
+   recovered = trainingData.recovered(date)\;
+   predictedRecovered = individual.trees[2].predict(date)\;
+   recoveredAccuracy = abs(recovered - predictedRecovered) / recovered\;
+   \BlankLine
+   fitness += (casesAccuracy + deathsAccuracy + recoveredAccuracy) / 3\;
+ }
+ \BlankLine
+ return fitness / trainingData.numDays\;
+ \caption{Fitness Function}
+\end{algorithm}

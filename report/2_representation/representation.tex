@@ -1,0 +1,49 @@
+\section{Representation}
+
+\subsection{Nodes}
+The possible nodes for each individual comprises nodes from a function set and a terminal set. Nodes in the function set take a certain number of parameters and perform a calculation whereas terminals simply represent some constant value.
+
+Initially, the function set consisted only of elementary numerical operators and the terminal set was made up of the number COVID-19 cases, deaths and recoveries on each of the 30 days preceding the date for which a prediction was being made. Unfortunately, this led to the same problem identified by Hui \cite{hui2003using} in that the genetic program always converged to a local minimum which predominantly uses yesterday’s stock price for its prediction.
+
+As a result, a similar approach to Hoi's \cite{hui2003using} was used to overcome the problem. Specifically - instead of using the number COVID-19 cases, deaths and recoveries - the daily changes in COVID-19 cases, deaths and recoveries was used. In addition, these were not directly used as terminal nodes; rather, the only terminal node used was the ephemeral floating random constant atom R. 
+
+The terminal node R produced constants in the range [0, 1) which were taken as arguments to 3 nodes in the function set (\emph{C}, \emph{D} and \emph{H}) that  map the value to the daily change in cases, deaths or recoveries on a specific day within the last 30 days. The rest of the function set was made up of the elementary numerical operators. The full function and terminal set are detailed in table \ref{tab:function_and_terminal_set}.
+
+\begin{table}[H]
+\resizebox{\textwidth}{!}{\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Symbol} & \textbf{Arity} & \textbf{Description}                                                                                                                                                            \\ \hline
++               & 2              & The addition operator                                                                                                                                                           \\ \hline
+-               & 2              & The subtraction operator                                                                                                                                                        \\ \hline
+*               & 2              & The multiplication operator                                                                                                                                                     \\ \hline
+/               & 2              & The protected division operator (division by 0 results in 1)                                                                                                                    \\ \hline
+C               & 1              & \begin{tabular}[c]{@{}c@{}}Maps a value in the range {[}0,1) to the change in confirmed cases\\ from the previous day for a particular day within the last 30 days\end{tabular} \\ \hline
+D               & 1              & \begin{tabular}[c]{@{}c@{}}Maps a value in the range {[}0,1) to the change in deaths\\ from the previous day for a particular day within the last 30 days\end{tabular}          \\ \hline
+H               & 1              & \begin{tabular}[c]{@{}c@{}}Maps a value in the range {[}0,1) to the change in recoveries\\ from the previous day for a particular day within the last 30 days\end{tabular}      \\ \hline
+R               & 0              & The ephemeral random floating constant atom R in the range {[}0,1)                                                                                                              \\ \hline
+\end{tabular}}
+\caption{Function and Terminal Set}
+\label{tab:function_and_terminal_set}
+\end{table}
+
+\subsection{Individuals}\label{sec:individuals}
+Each chromosome within a population consists of 3 syntax trees. To clarify, syntax trees include nodes and links the nodes. Nodes indicate the instructions to execute while the links indicate the arguments for each instruction. As per Koza \cite{koza1992genetic}, the internal nodes are called functions while the tree’s leaves are called terminals. Given the function and terminal set that was identified, an example of one such syntax tree is depicted in figure \ref{fig:syntax_tree}.
+
+The reason for having each chromosome comprise 3 different syntax trees is because the first tree will be optimized for predicting the number of confirmed cases, the second for predicting the number of deaths and the third for predicting the number of recoveries. The trees will be optimized in this way by means of the chromosome's fitness evaluation, described in section \ref{sec:fitness}.
+
+% minimum distance between nodes on the same line
+\setlength{\GapWidth}{1em}  
+% draw with a thick dashed line, very nice looking
+\thicklines \drawwith{\dottedline{2}}   
+% draw an oval and center it with the rule.  You may want to fool with the
+% rule values, though these seem to work quite well for me.  If you make the
+% rule smaller than the text height, then the GP nodes may not line up with
+% each other horizontally quite right, so watch out.
+\newcommand{\gpbox}[1]{\Ovalbox{#1\rule[-.7ex]{0ex}{2.7ex}}}
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\textwidth}{!}{\begin{bundle}{\gpbox{*}}\chunk{\begin{bundle}{\gpbox{+}}\chunk{\begin{bundle}{\gpbox{-}}\chunk{\begin{bundle}{\gpbox{C}}\chunk{\gpbox{R0.39}}\end{bundle}}\chunk{\begin{bundle}{\gpbox{/}}\chunk{\begin{bundle}{\gpbox{C}}\chunk{\gpbox{R0.82}}\end{bundle}}\chunk{\begin{bundle}{\gpbox{R}}\chunk{\gpbox{R0.08}}\end{bundle}}\end{bundle}}\end{bundle}}\chunk{\begin{bundle}{\gpbox{+}}\chunk{\begin{bundle}{\gpbox{C}}\chunk{\gpbox{R0.25}}\end{bundle}}\chunk{\begin{bundle}{\gpbox{+}}\chunk{\gpbox{R0.84}}\chunk{\gpbox{R0.02}}\end{bundle}}\end{bundle}}\end{bundle}}\chunk{\begin{bundle}{\gpbox{/}}\chunk{\begin{bundle}{\gpbox{C}}\chunk{\gpbox{R0.09}}\end{bundle}}\chunk{\begin{bundle}{\gpbox{D}}\chunk{\gpbox{R0.08}}\end{bundle}}\end{bundle}}\end{bundle}}
+    \caption{Syntax Tree}
+    \label{fig:syntax_tree}
+\end{figure}

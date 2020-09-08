@@ -1,0 +1,7 @@
+\section{Initial Population Generation}
+
+Of course, a population consists of a collection of the individuals that have been described in section \ref{sec:individuals}. Importantly, the genetic algorithm applied only made use of a single population consisting of 2048 individuals. This means that only a single population was evolved and cross-population breeding was not applied.
+
+The initial population was generated using the ramped-half-and-half method proposed by Koza \cite{koza1992genetic} to enhance population diversity of structure. The maximum tree depth allowed during the initial population generation was 8. So, in other words, the population is divided equally among individuals to be initialized with trees having depths 2, 3, 4, 5, 6, 7 and 8. For each depth group, half of the trees are initialized with the full technique and half with the grow technique.
+
+In addition, to cover as much of the search space as possible an effort was made to reduce duplicates within the initial population. The strategy used to reduce the number of duplicates was as follows: if a duplicate individual is created as part of the initial population, it will be regenerated up to 100 times to try replace it with a new, original individual. After 100 attempts, if no unique individual was generated, the duplicate individual will be used.

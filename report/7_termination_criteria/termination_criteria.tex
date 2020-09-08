@@ -1,0 +1,4 @@
+\section{Termination Criteria}
+As is customary for most genetic programming approaches, certain termination criteria are necessary to ensure a finite amount of time before a solution is produced. For this assignment we include a maximum number of generations to be run as well as a problem-specific success predicate as the termination criteria.
+
+The success predicate entails an individual predicting the cases, deaths and recoveries for all dates in the training set within a 5\% range. The maximum number of generations allowed was chosen as 256. Notably, in the tests that were run the success predicate was never triggered.

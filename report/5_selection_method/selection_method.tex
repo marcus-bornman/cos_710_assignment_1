@@ -1,0 +1,6 @@
+\section{Selection Method}
+To generate a new population, specific genetic operators are applied to members of an existing population according to predefined probabilities. These operators are explained in more detail in section \ref{sec:genetic_operators}. However, before these operators can be applied, the members of the existing population to which they need to be applied must be determined - hence, a selection method is necessary.
+
+For this assignment, tournament selection \cite{miller1995genetic} was used as the selection method for all genetic operators. This entails selecting \emph{T} individuals entirely at random from the existing population. Then, from this set of individuals (ie. the \emph{tournament}) the fittest individual is selected. After some initial test runs the size, \emph{T}, of the tournament used was 256. On average, this tournament size produced the best balance between genetic diversity and convergence.
+
+In the cases where genetic operators required more than one individual from the existing population, the tournament selection method was simply reapplied to select each individual.

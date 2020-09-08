@@ -1,0 +1,30 @@
+\section{Results and Discussion}
+As has been mentioned, 10 test runs were executed. Each run entailed running the genetic algorithm with a different set of seeds. The best individual fitness, number of hits, mean squared error and runtime for each of the 10 runs are detailed in table \ref{tab:test_results}. To clarify, a single hit is a day for which the prediction of the best individual was within an average of 5\% of the actual cases, deaths or recoveries.
+
+\begin{table}[H]
+\resizebox{\textwidth}{!}{\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Run} & \textbf{Best Individual Fitness} & \textbf{Number of Hits} & \textbf{Mean Squared Error} & \textbf{Runtime} \\ \hline
+1            & 0.16981653012815615              & 11                      & 0.02884                     & 0m56.559s        \\ \hline
+2            & 0.11708801796762536              & 18                      & 0.01371                     & 5m46.942s        \\ \hline
+3            & 0.07924233842929927              & 39                      & 0.00628                     & 7m59.488s        \\ \hline
+4            & 0.10260196769743599              & 36                      & 0.01053                     & 7m38.561s        \\ \hline
+5            & 0.09179369543784227              & 33                      & 0.00843                     & 5m31.616s        \\ \hline
+6            & 0.14551612276194176              & 10                      & 0.02117                     & 2m17.149s        \\ \hline
+7            & 0.08699608922920267              & 49                      & 0.00757                     & 3m9.732s         \\ \hline
+8            & 0.10736871065116832              & 22                      & 0.01153                     & 2m56.155s        \\ \hline
+9            & 0.11435758695560931              & 21                      & 0.01308                     & 2m5.639s         \\ \hline
+10           & 0.1395859048040605               & 14                      & 0.01948                     & 3m45.321s        \\ \hline
+\end{tabular}}
+\caption{Test Results}
+\label{tab:test_results}
+\end{table}
+
+
+As can be derived from the results, the best mean squared error was 0.00628; the average mean squared error was 0.01354; the best fitness was 0.07924 and, lastly the average fitness was 0.10971.
+
+When compared to the results of genetic programming approaches that were used to solve similar time-series problems \cite{hui2003using, de2005genetic} the results of these tests also indicate the effectiveness of the approach to perform time series predictions. Given the short run times, limited generations and relatively small population size the algorithm produced a function that could predict test data within a 7\% accuracy on average. 
+
+An area of concern, however, is that the functions produced have not yet been used for cross-validation. A part of the data set that could be used for cross validation has been separated as part of this assignment but performing the cross-validation has been left as an area for future work.
+
+

@@ -1,0 +1,83 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{lmodern}
+\usepackage{mdframed}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage[parfill]{parskip}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{epic}	
+\usepackage{ecltree}	
+\usepackage{fancybox}	
+\usepackage{float}
+\usepackage[ruled,vlined]{algorithm2e}
+
+\newcommand{\BlackBox}{\rule{1.5ex}{1.5ex}}
+
+\definecolor{blue}{rgb}{0,0,0.8}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset
+{
+   basicstyle=\ttfamily\footnotesize,
+   language=C++,
+   numbers=right,
+   numberstyle=\color{gray},
+   showtabs=true,
+   breaklines=true,
+   breakatwhitespace=true,
+   captionpos=bottom,
+   keywordstyle=\color{blue},
+   commentstyle=\color{dkgreen},
+   stringstyle=\color{mauve},
+   frame=single
+}
+
+\mdfsetup
+{
+   skipabove=\topskip,
+   skipbelow=\topskip,
+   leftmargin=2em,
+   rightmargin=2em
+}
+
+
+\title
+{
+   \includegraphics[width=12cm]{report/0_title_page/up_logo.png} \\
+   \vspace{2cm}
+   \textbf{COS710 Assignment 1} \\ \vspace{0.5cm}
+   \textbf{Genetic Programming and Symbolic Regression} \\ \vspace{0.5cm}
+%   \textbf{Student number:} u15024522 \\ \vspace{0.5cm}
+  \author{Student Number: u15024522}
+}
+
+\date{}
+\begin{document}
+
+\maketitle
+
+\newpage
+\linespread{1.25}
+
+\input{report/1_introduction/introduction}
+\input{report/2_representation/representation}
+\input{report/3_initial_population/initial_population}
+\input{report/4_fitness/fitness}
+\input{report/5_selection_method/selection_method}
+\input{report/6_genetic_operators/genetic_operators}
+\input{report/7_termination_criteria/termination_criteria}
+\input{report/8_experimental_setup/experimental_setup}
+\input{report/9_results_and_discussion/results_and_discussion}
+
+\bibliographystyle{ieeetr}
+\bibliography{research_proposal/10_references/bibliography}
+
+\end{document}
