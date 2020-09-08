@@ -1,5 +1,3 @@
-parent.0 = koza.params
-
 # ========================================== The cores and random seeds to use
 evalthreads = 				4
 breedthreads = 				4
@@ -8,26 +6,12 @@ seed.1 =				time
 seed.2 =				time
 seed.3 =				time
 
-# ========================================== The details of the trees (3 trees will be used to predict confirmed, deaths and recoveries)
-pop.subpop.0.species.ind.numtrees = 3
 
-pop.subpop.0.species.ind.tree.0 = ec.gp.GPTree
-pop.subpop.0.species.ind.tree.0.tc = tc0
-pop.subpop.0.species.ind.tree.1 = ec.gp.GPTree
-pop.subpop.0.species.ind.tree.1.tc = tc0
-pop.subpop.0.species.ind.tree.2 = ec.gp.GPTree
-pop.subpop.0.species.ind.tree.2.tc = tc0
+# ========================================== Genes
+gp.fs.size = 1
+gp.fs.0 = ec.gp.GPFunctionSet
+gp.fs.0.name = f0
 
-gp.tc.size = 1
-
-gp.tc.0 = ec.gp.GPTreeConstraints
-gp.tc.0.name = tc0
-gp.tc.0.fset = f0
-gp.tc.0.returns = nil
-gp.tc.0.init = ec.gp.koza.HalfBuilder
-
-
-# ========================================== The available nodes
 gp.fs.0.size = 8
 gp.fs.0.func.0 = nodes.R
 gp.fs.0.func.0.nc = nc0
@@ -46,8 +30,6 @@ gp.fs.0.func.6.nc = nc2
 gp.fs.0.func.7 = nodes.Subtract
 gp.fs.0.func.7.nc = nc2
 
-
-# ========================================== Constraints on Nodes
 gp.type.a.size = 2
 gp.type.a.0.name = nil
 gp.type.a.1.name = R
@@ -58,18 +40,15 @@ gp.type.s.0.member.0 = R
 gp.type.s.0.member.1 = nil
 
 gp.nc.size = 3
-
 gp.nc.0 = ec.gp.GPNodeConstraints
 gp.nc.0.name = nc0
 gp.nc.0.returns = R
 gp.nc.0.size = 0
-
 gp.nc.1 = ec.gp.GPNodeConstraints
 gp.nc.1.name = nc1
 gp.nc.1.returns = nil
 gp.nc.1.size = 1
 gp.nc.1.child.0 = R
-
 gp.nc.2 = ec.gp.GPNodeConstraints
 gp.nc.2.name = nc2
 gp.nc.2.returns = nil
@@ -77,19 +56,37 @@ gp.nc.2.size = 2
 gp.nc.2.child.0 = R-or-nil
 gp.nc.2.child.1 = R-or-nil
 
+# ========================================== Chromosomes
 
-# ========================================== Initial tree creation
-gp.koza.half.min-depth = 2
-gp.koza.half.max-depth = 8
-gp.koza.half.growp = 0.5
+pop.subpop.0.species.ind = ec.gp.GPIndividual
+pop.subpop.0.species.ind.numtrees = 3
+pop.subpop.0.species.ind.tree.0 = ec.gp.GPTree
+pop.subpop.0.species.ind.tree.0.tc = tc0
+pop.subpop.0.species.ind.tree.1 = ec.gp.GPTree
+pop.subpop.0.species.ind.tree.1.tc = tc0
+pop.subpop.0.species.ind.tree.2 = ec.gp.GPTree
+pop.subpop.0.species.ind.tree.2.tc = tc0
+
+gp.tc.size = 1
+gp.tc.0 = ec.gp.GPTreeConstraints
+gp.tc.0.name = tc0
+gp.tc.0.fset = f0
+gp.tc.0.returns = nil
+gp.tc.0.init = ec.gp.koza.HalfBuilder
 
 
-# ========================================== Population and generation parameters
-generations =				256
+# ========================================== Population
+
+pop = 					    ec.Population
+pop.subpops =				1
+pop.subpop.0 = 				ec.Subpopulation
 pop.subpop.0.size =			2048
+pop.subpop.0.duplicate-retries =	100
+pop.subpop.0.species = ec.gp.GPSpecies
+pop.subpop.0.species.pipe = ec.breed.MultiBreedingPipeline
+pop.subpop.0.species.pipe.generate-max = false
+pop.subpop.0.species.fitness = ec.gp.koza.KozaFitness
 
-
-# ========================================== Crossover, mutation and reproduction rates
 pop.subpop.0.species.pipe.num-sources = 3
 pop.subpop.0.species.pipe.source.0 = ec.gp.koza.CrossoverPipeline
 pop.subpop.0.species.pipe.source.0.prob = 0.9
@@ -99,13 +96,23 @@ pop.subpop.0.species.pipe.source.2 = ec.breed.ReproductionPipeline
 pop.subpop.0.species.pipe.source.2.prob = 0.05
 
 
-# ========================================== Crossover and mutation methods
+# ========================================== Genetic Operators
+
+generations =				256
+
+gp.koza.half.min-depth = 2
+gp.koza.half.max-depth = 8
+gp.koza.half.growp = 0.5
+
+breed.reproduce.source.0 = ec.select.TournamentSelection
+
 gp.koza.xover.source.0 = ec.select.TournamentSelection
 gp.koza.xover.source.1 = same
 gp.koza.xover.ns.0 = ec.gp.koza.KozaNodeSelector
 gp.koza.xover.ns.1 = same
 gp.koza.xover.maxdepth = 16
 gp.koza.xover.tries = 1
+
 gp.koza.mutate.source.0 = ec.select.TournamentSelection
 gp.koza.mutate.ns.0 = ec.gp.koza.KozaNodeSelector
 gp.koza.mutate.build.0 = ec.gp.koza.GrowBuilder
@@ -113,7 +120,29 @@ gp.koza.mutate.maxdepth = 16
 gp.koza.mutate.tries = 1
 select.tournament.size = 256
 
+gp.koza.grow.min-depth = 5
+gp.koza.grow.max-depth = 5
+gp.problem.stack = ec.gp.ADFStack
+gp.adf-stack.context = ec.gp.ADFContext
+gp.koza.ns.terminals = 0.1
+gp.koza.ns.nonterminals = 0.9
+gp.koza.ns.root = 0.0
+
 
 # ========================================== The problem to evaluate
 eval.problem = problem.CovidProblem
 eval.problem.data = problem.PredictionData
+
+# ========================================== Other
+state = 				    ec.simple.SimpleEvolutionState
+init = 					    ec.simple.SimpleInitializer
+finish = 	        	    ec.simple.SimpleFinisher
+exch = 					    ec.simple.SimpleExchanger
+breed =					    ec.simple.SimpleBreeder
+eval =					    ec.simple.SimpleEvaluator
+stat =					    ec.simple.SimpleStatistics
+quit-on-run-complete =		true
+checkpoint =				false
+checkpoint-modulo =                     1
+checkpoint-prefix = 			ec
+init = ec.gp.GPInitializer
