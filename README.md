@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <p align="right">
 <a href="https://pub.dev">
-<img src="https://raw.githubusercontent.com/marcus-bornman/cos_710_assignment_1/master/assets/project_badge.png" height="100" alt="Flutter">
+<img src="https://raw.githubusercontent.com/marcus-bornman/cos_710_assignment_1/master/assets/project_badge.png" height="50" alt="Flutter">
 </a>
 </p>
 <p align="center">
