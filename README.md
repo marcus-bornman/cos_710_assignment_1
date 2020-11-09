@@ -55,7 +55,7 @@ See the following for detailed information about the project:
 
 <!-- GETTING STARTED -->
 ## Getting Started
-To build this project you will need to have ava 1.8 or later installed as well as [Apache Maven](https://maven.apache.org).
+To build this project you will need to have Java 1.8 or later installed as well as [Apache Maven](https://maven.apache.org).
 
 You can ensure that the project compiles by running the following command in the root folder of this project:
 ```
