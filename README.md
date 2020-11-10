@@ -1,6 +1,6 @@
 <!-- PROJECT LOGO -->
 <p align="right">
-<a href="https://pub.dev">
+<a href="https://www.up.ac.za">
 <img src="https://raw.githubusercontent.com/marcus-bornman/cos_710_assignment_1/master/assets/project_badge.png" height="50" alt="Flutter">
 </a>
 </p>
