@@ -550,6 +550,6 @@ Subpop 0 best fitness of generation Fitness: Standardized=0.16981653012815615 Ad
 Total Evaluations 524288
 Subpop 0 best fitness of run: Fitness: Standardized=0.16981653012815615 Adjusted=0.8548349029487963 Hits=11
 
-real	0m56.559s
-user	3m34.917s
-sys	0m2.628s
+real	0m53.117s
+user	3m28.301s
+sys	0m1.990s

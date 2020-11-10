@@ -39,13 +39,13 @@
 <img src="https://raw.githubusercontent.com/marcus-bornman/cos_710_assignment_1/master/assets/screenshot_1.gif" width="800" alt="Screenshot 1" />
 </p>
 
-This assignment involves the implementation of a genetic programming approach to evolve a model for forecasting COVID-19
-infections, deaths and recoveries for a particular day for a particular country. The covid_19_data.csv at https://www.kaggle.com/sudalairajkumar/novel-corona-virus-2019-dataset?select=covid_19_data.csv
-is used to evaluate the genetic programming approach for forecasting COVID-19.
+This assignment - completed as part of the COS710 (Artificial Intelligence) Honours module at the University of Pretoria -
+involves the implementation of a genetic programming approach to evolve a model for forecasting COVID-19
+infections, deaths and recoveries for a particular day for a particular country.
 
 See the following for detailed information about the project:
-* [specification.pdf](specification.pdf) - The specification for this assignment.
-* [report.pdf](report/report.pdf) - The report submitted for this assignment.
+* [specification.pdf](assets/specification.pdf) - The specification for this assignment.
+* [report.pdf](assets/report/report.pdf) - The report submitted for this assignment.
 
 ### Built With
 * [Java](https://www.java.com/en/)
@@ -66,10 +66,10 @@ mvn clean compile assembly:single
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-To reproduce the results mentioned in [the report for this assignment](report/report.pdf), you simply need to run the
-[reproduce.sh](reproduce.sh) script found in the root folder of this project:
+To reproduce the results mentioned in [the report for this assignment](assets/report/report.pdf), you simply need to run the
+[reproduce.sh](results/reproduce.sh) from the root of this project:
 ```shell script
-sh reproduce.sh
+sh results/reproduce.sh
 ```
 This will reproduce the output for 10 test runs in the [results folder](results).
 
@@ -77,7 +77,7 @@ This will reproduce the output for 10 test runs in the [results folder](results)
 
 <!-- ROADMAP -->
 ## Roadmap
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of other proposed features (and known issues).
+See the [open issues](https://github.com/marcus-bornman/cos_710_assignment_1/issues) for a list of other proposed features (and known issues).
 
 
 
